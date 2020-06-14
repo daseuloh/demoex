@@ -40,6 +40,7 @@ public class MemberController {
 	public String loginpost(MemberVO obj) {
 		MemberVO obj1 = mDAO.selectMemberLogin(obj);
 		
+		
 		return "";
 	}
 }

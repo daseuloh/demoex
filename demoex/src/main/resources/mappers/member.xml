@@ -15,4 +15,8 @@
  		SELECT USERID, USERNAME, PHONE FROM MEMBER
  		WHERE USERID=#{userid} AND PASSWORD=#{password}
  	</select>
+ 	
+ 	<select id="memberList" resultType="com.example.vo.MemberVO">
+ 		SELECT * FROM MEMBER
+ 	</select>
  </mapper>

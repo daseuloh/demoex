@@ -1,5 +1,7 @@
 package com.example.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,10 @@ public class MemberDAO {
 	
 	public MemberVO selectMemberLogin(MemberVO obj){
 		return sqlFactory.openSession().selectOne("Member.login", obj);
+	}
+	
+	public List<MemberVO> selectMemberList(){
+		return sqlFactory.openSession().selectList("Member.memberList");
 	}
 
 }

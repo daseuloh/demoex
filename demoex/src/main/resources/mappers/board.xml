@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Board">
+  
+	<insert id="insertBoard" parameterType="com.example.vo.BoardVO">
+  	INSERT 
+  		INTO BOARD(BRD_NO, BRD_TITLE, BRD_CONTENT, 
+  		BRD_IMG, BRD_ID, BRD_HIT, BRD_DATE)
+  	VALUES
+  		(SEQ_BOARD_NO.NEXTVAL, #{brd_title}, #{brd_content}, 
+  		#{brd_img}, #{brd_id}, #{brd_hit}, SYSDATE)
+	</insert>
+  
+	<select id="selectList" parameterType="map" resultType="com.example.vo.BoardVO">
+		SELECT * FROM
+			(SELECT 
+				BRD_NO, BRD_TITLE, BRD_ID, BRD_HIT, BRD_DATE, 
+				ROW_NUMBER() OVER (ORDER BY BRD_NO DESC) ROWN 
+			FROM 
+				BOARD
+			WHERE
+				BRD_TITLE LIKE '%' || #{text} || '%')
+		WHERE ROWN BETWEEN #{start} AND #{end}
+	</select>
+  
+	<select id="count" parameterType="String" resultType="int">
+  	SELECT COUNT(*) FROM BOARD
+		WHERE BRD_TITLE LIKE '%' || #{text} || '%'
+	</select>
+  
+	<update id="updateHit" parameterType="int">
+		UPDATE BOARD SET BRD_HIT = BRD_HIT + 1
+		WHERE BRD_NO = #{no}
+	</update>
+  
+	<select id="selectBoardOne" parameterType="int" resultType="com.example.vo.BoardVO">
+		SELECT * FROM BOARD WHERE BRD_NO=#{no}
+	</select>
+  
+	<select id="selectBoardPrev" parameterType="int" resultType="int">
+		SELECT NVL(MAX(BRD_NO),0) FROM BOARD
+		WHERE BRD_NO <![CDATA[ < ]]> #{brd_no}
+	</select>
+	
+	<select id="selectBoardNext" parameterType="int" resultType="int">
+		SELECT NVL(MIN(BRD_NO),0) FROM BOARD
+		WHERE BRD_NO <![CDATA[ > ]]> #{brd_no}
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List">
+		INSERT ALL
+		<!-- for (ItemVO obj : list> {  와 같은 말-->
+			<foreach collection="list" item="obj" separator=" ">
+		    INTO BOARD(BRD_NO, BRD_TITLE, BRD_CONTENT, BRD_ID, BRD_HIT, BRD_DATE)
+		        VALUES(MY_GET_SEQ_BOARDNUMBER, #{obj.brd_title}, #{obj.brd_content}, #{obj.brd_id}, #{obj.brd_hit}, SYSDATE)
+	        </foreach>
+		SELECT * FROM DUAL
+	</insert>
+	
+  
+  </mapper>

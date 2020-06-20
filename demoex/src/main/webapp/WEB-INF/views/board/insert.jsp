@@ -1,44 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>게시판 글쓰기</title>
-<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" 
+	<meta charset="UTF-8">
+	<title>게시판 글쓰기</title>
+	<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" 
 		rel="stylesheet"/>
 </head>
 
 <body>
 	<div class="container">
-		<div style="width:900px; padding:20px; border:1px solid #cccccc;">
-			<form action="/board/insert" method="post" enctype="multipart/form-data">
-				<div class="form-inline" style="margin:5px;">
-					<label style="width:100px;">글제목</label>
-					<input style="width:700px" type="text" class="form-control" name="brd_title" placeholder="제목"/>
+		<div style="width:600px; padding:30px; border:1px solid #cccccc">
+			<form action="${pageContext.request.contextPath}/board/insert" method="post" enctype="multipart/form-data">
+				<div style="margin-bottom:10px">
+					<input type="text" class="form-control" name="brd_title" placeholder="글제목" />
 				</div>
-				<div class="form-inline" style="margin:5px;">
-					<label style="width:100px;">내용</label>
-					<textarea style="width:700px" class="form-control" name="brd_content" placeholder="내용"></textarea>
+				<div style="margin-bottom:10px">
+					<textarea id="content" class="form-control" name="brd_content" placeholder="글내용"></textarea>
 				</div>
-				<div class="form-inline" style="margin:5px;">
-					<label style="width:100px;">작성자</label>
-					<input style="width:700px" type="text" class="form-control" name="brd_id" value="${userid}" readonly/>
+				<div style="margin-bottom:10px">
+					<input type="text" class="form-control" name="brd_id" value="${userid}" readonly />
 				</div>
-				<div class="form-inline" style="margin:5px;">
-					<label style="width:100px;">이미지</label>
-					<input style="width:700px" type="file" class="form-control" name="imgs"/>
-				</div>
-				<div class="form-inline" style="margin:5px;">
-					<label style="width:100px;"></label>
-					<input type="submit" class="btn btn-success" value="글쓰기" style="margin-left:700px"/>
-
-				</div>
-				
+				<div style="margin-bottom:10px">
+					<input type="file" class="form-control" name="imgs" />
+				</div>	
+				<hr />
+				<input type="submit" class="btn btn-success" value="글쓰기 " />
 			</form>
 		</div>
-			
 	</div>
-	
 </body>
 </html>
+

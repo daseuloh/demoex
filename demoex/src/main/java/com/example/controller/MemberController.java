@@ -73,14 +73,4 @@ public class MemberController {
 	
 	
 }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+

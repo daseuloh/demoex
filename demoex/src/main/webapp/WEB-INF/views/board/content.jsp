@@ -56,14 +56,11 @@
 					}).then((result) => {
 					  if (result.value) {
 					    window.location.href= "/board/delete?no=" + no;
-					    )
 					  }
 					})
-
 				})
 			})
 	</script>
-	
-	
+
 </body>
 </html>

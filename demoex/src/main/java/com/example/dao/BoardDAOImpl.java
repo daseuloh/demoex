@@ -52,10 +52,10 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlFactory.openSession().selectOne("Board.selectBoardNext", no);
 	}
 
-	@Override
-	public int insertBatch(List<BoardVO> list) {
-		return sqlFactory.openSession().insert("Board.insertBatch", list);
-	}
+
+
+
+
 	
 	
 

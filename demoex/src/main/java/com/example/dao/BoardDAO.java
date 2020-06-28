@@ -20,6 +20,6 @@ public interface BoardDAO {
 	public int selectBoardPrev(int no);
 	public int selectBoardNext(int no);
 	
-	public int insertBatch(List<BoardVO> list);
+
 
 }

@@ -51,15 +51,7 @@
 		WHERE BRD_NO <![CDATA[ > ]]> #{brd_no}
 	</select>
 	
-	<insert id="insertBatch" parameterType="java.util.List">
-		INSERT ALL
-		<!-- for (ItemVO obj : list> {  와 같은 말-->
-			<foreach collection="list" item="obj" separator=" ">
-		    INTO BOARD(BRD_NO, BRD_TITLE, BRD_CONTENT, BRD_ID, BRD_HIT, BRD_DATE)
-		        VALUES(MY_GET_SEQ_BOARDNUMBER, #{obj.brd_title}, #{obj.brd_content}, #{obj.brd_id}, #{obj.brd_hit}, SYSDATE)
-	        </foreach>
-		SELECT * FROM DUAL
-	</insert>
+
 	
   
   </mapper>

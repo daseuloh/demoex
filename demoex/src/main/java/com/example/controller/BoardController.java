@@ -77,7 +77,31 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/content", method=RequestMethod.GET)
-	public String content() {
+	public String content(Model model, HttpSession httpSession,
+			@RequestParam(value = "no", defaultValue = "0", required = false) int no) {
+		
+		if(no==0) {
+			return "redirect:/board/list";
+		}
+		
+		Integer chk = (Integer)httpSession.getAttribute("SESSION_BOARD_HIT_CHECK");
+		
+		if(chk != null) {
+			if(chk ==1) {
+				bDAO.updateHit(no);
+			}
+			httpSession.setAttribute("SESSION_BOARD_HIT_CHECK", 0);
+		}
+		
+		BoardVO obj = bDAO.selectBoardOne(no);
+		model.addAttribute("obj", obj);
+		
+		int p = bDAO.selectBoardPrev(no);
+		model.addAttribute("prev", p);
+		
+		int n = bDAO.selectBoardNext(no);
+		model.addAttribute("next", n);
+
 		return "/board/content";
 	}
 	

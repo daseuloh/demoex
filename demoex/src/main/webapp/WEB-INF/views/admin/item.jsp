@@ -78,8 +78,35 @@
 	  </div>
 	</div>
 	
-	<script type="text/javascript">
-		$(function)
+	<script src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js" type="text/javascript"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script type="text/javascript">	
+		$(function(){
+			$('.myupdatebtn').click(function(){
+				$('.modal').modal('show');
+				})
+
+			$('.mydeletebtn').click(function(){
+				var idx = $(this).index('.mydeletebtn');
+				var no = $('.tditemno').eq(idx).text();
+
+				Swal.fire({
+					  title: '삭제확인',
+					  text: "삭제하시겠습니까?",
+					  icon: 'warning',
+					  showCancelButton: true,
+					  confirmButtonColor: '#3085d6',
+					  cancelButtonColor: '#d33',
+					  confirmButtonText: '확인',
+					  cancelButtonText:'취소'
+					}).then((result) => {
+					  if (result.value) {
+						window.location.href = "/admin/itemdeleteone?no=" + no;
+					  }
+					})
+				})
+			})
 	</script>
 	
 	

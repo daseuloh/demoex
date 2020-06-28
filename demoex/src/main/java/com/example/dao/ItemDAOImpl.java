@@ -21,4 +21,9 @@ public class ItemDAOImpl implements ItemDAO{
 		return sqlFactory.openSession().selectList("Item.selectList");
 	}
 
+	@Override
+	public int delegeItemBatch(int[] no) {
+		return sqlFactory.openSession().delete("Item.deleteItemBatch");
+	}
+
 }

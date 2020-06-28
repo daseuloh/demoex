@@ -9,4 +9,12 @@
   	<select id="selectList" resultType="com.example.vo.ItemVO">
   		SELECT * FROM ITEM ORDER BY ITEMNO DESC
   	</select>
+  	
+  	<delete id="deleteItemBatch" parameterType="int">
+  		DELETE FROM ITEM WHERE ITEMNO IN(
+  		<foreach collection="array" item="tmp" separator=",">
+  			
+  		</foreach>
+  		)
+  	</delete>
   </mapper>

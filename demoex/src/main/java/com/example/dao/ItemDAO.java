@@ -7,5 +7,7 @@ import com.example.vo.ItemVO;
 public interface ItemDAO {
 	
 	public List<ItemVO> selectItemList();
+	
+	public int delegeItemBatch(int[] no);
 
 }
